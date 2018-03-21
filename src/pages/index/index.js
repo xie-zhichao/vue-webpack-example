@@ -1,6 +1,6 @@
 /* 引入vue和主页 */
 import Vue from 'vue'
-import ToDo from './components/todo/ToDo.vue'
+import ToDo from '@/components/todo/ToDo'
 
 /* 实例化一个vue */
 new Vue({

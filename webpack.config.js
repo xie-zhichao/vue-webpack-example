@@ -1,17 +1,41 @@
+'use strict'
 /* 引入操作路径模块和webpack */
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const utils = require('./build/utils')
+
+//设置环境
+new webpack.DefinePlugin({
+    'process.env': {
+        NODE_ENV: '"production"'
+    }
+})
+
+// 解析目录地址
+var OUTPUT = path.resolve(__dirname, './dist'); // output目录
+
+function resolve (dir) {
+    return path.join(__dirname, dir)
+}
 
 module.exports = {
+    devtool: 'eval-source-map',
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            '@': resolve('src')
+        }
+    },
     /* 输入文件 */
-    entry: './src/main.js',
+    entry: utils.entries(),
     output: {
         /* 输出目录，没有则新建 */
-        path: path.resolve(__dirname, './dist'),
+        path: OUTPUT,
         /* 静态目录，可以直接从这里取文件 */
-        publicPath: '/dist/',
+        publicPath: '/',
         /* 文件名 */
-        filename: 'build.js'
+        filename: '[name].[hash].js'
     },
     module: {
         rules: [
@@ -28,5 +52,8 @@ module.exports = {
                 exclude: /node_modules/
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.BannerPlugin('版权所有，翻版必究')
+    ].concat(utils.htmlPlugin())
 }

@@ -5,12 +5,12 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const utils = require('./build/utils')
 
-//设置环境
-new webpack.DefinePlugin({
-    'process.env': {
-        NODE_ENV: '"production"'
-    }
-})
+// //设置环境
+// new webpack.DefinePlugin({
+//     'process.env': {
+//         NODE_ENV: '"production"'
+//     }
+// })
 
 // 解析目录地址
 var OUTPUT = path.resolve(__dirname, './dist'); // output目录
@@ -18,8 +18,8 @@ var OUTPUT = path.resolve(__dirname, './dist'); // output目录
 function resolve (dir) {
     return path.join(__dirname, dir)
 }
-
 module.exports = {
+    mode: process.env.NODE_ENV,
     devtool: 'eval-source-map',
     resolve: {
         extensions: ['.js', '.vue', '.json'],

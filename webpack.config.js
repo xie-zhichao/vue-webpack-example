@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const utils = require('./build/utils')
 
-// //设置环境
+// //设置环境, 可以命令行设置
 // new webpack.DefinePlugin({
 //     'process.env': {
 //         NODE_ENV: '"production"'
@@ -20,7 +20,7 @@ function resolve (dir) {
 }
 module.exports = {
     mode: process.env.NODE_ENV,
-    devtool: 'eval-source-map',
+    devtool: process.env.NODE_ENV==='development'?'eval-source-map':'cheap-module-source-map',
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {

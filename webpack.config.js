@@ -2,8 +2,7 @@
 /* 引入操作路径模块和webpack */
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const utils = require('./build/utils')
+const utils = require('./build/utils');
 
 // //设置环境, 可以命令行设置
 // new webpack.DefinePlugin({
